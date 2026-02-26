@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Intelligence</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="center-box">
+    <h1>Financial Document Intelligence</h1>
+    <p>Upload earnings reports, 10-K, 10-Q or investor presentations.</p>
+
+    <form action="/analyze" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/pdf" required>
+        <br><br>
+        <button type="submit">Analyze Document</button>
+    </form>
+</div>
+
+</body>
+</html>

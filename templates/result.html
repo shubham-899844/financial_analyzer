@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Report</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="report-container">
+
+    <h1>Analysis Report</h1>
+    <h2>{{ analysis.document_type }} - {{ analysis.period }}</h2>
+
+    <h3>Executive Summary</h3>
+    <p>{{ analysis.summary }}</p>
+
+    <div class="financial-grid">
+        <div class="metric"><strong>Revenue</strong><br>$ {{ analysis.financials.revenue }} M</div>
+        <div class="metric"><strong>Gross Profit</strong><br>$ {{ analysis.financials.gross_profit }} M</div>
+        <div class="metric"><strong>Operating Income</strong><br>$ {{ analysis.financials.operating_income }} M</div>
+        <div class="metric"><strong>Net Income</strong><br>$ {{ analysis.financials.net_income }} M</div>
+        <div class="metric"><strong>EPS</strong><br>{{ analysis.financials.eps }}</div>
+        <div class="metric"><strong>Operating Margin</strong><br>{{ analysis.financials.operating_margin }}%</div>
+        <div class="metric"><strong>Free Cash Flow</strong><br>$ {{ analysis.financials.free_cash_flow }} M</div>
+        <div class="metric"><strong>Cash</strong><br>$ {{ analysis.financials.cash }} M</div>
+    </div>
+
+    <h3>Revenue Chart</h3>
+    <canvas id="revenueChart"></canvas>
+
+    <h3>Risks</h3>
+    <ul>
+        {% for risk in analysis.risks %}
+        <li>{{ risk }}</li>
+        {% endfor %}
+    </ul>
+
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+</div>
+
+<script>
+const ctx = document.getElementById('revenueChart');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Revenue', 'Gross Profit', 'Operating Income', 'Net Income'],
+        datasets: [{
+            label: 'Financials (Million USD)',
+            data: [
+                {{ analysis.financials.revenue }},
+                {{ analysis.financials.gross_profit }},
+                {{ analysis.financials.operating_income }},
+                {{ analysis.financials.net_income }}
+            ]
+        }]
+    }
+});
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+}
+</script>
+
+</body>
+</html>
