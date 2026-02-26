@@ -88,6 +88,7 @@ Dark mode toggle
 Responsive layout
 
 Project Structure
+
 financial_analyzer/
 │
 ├── main.py
